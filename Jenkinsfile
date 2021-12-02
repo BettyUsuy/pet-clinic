@@ -119,16 +119,7 @@ pipeline {
     }
 }
 
-stage('Rollback'){
-    when {
-        expression { env.PRODUCTION_OK == 'false'}
-    }
-    agent any
-    steps {
-        sh "chmod +x deploy.sh"
-        sh "./deploy.sh prod $PRODUCTION_LATEST"
-    }
-}
+
 stage('Tag Production Package'){
     when {
         expression { env.PRODUCTION_OK == 'true'}
